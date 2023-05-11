@@ -10,6 +10,6 @@ block content
           .mensagem 
             p.texto #{message.text}
             p.autor por #{message.user}
-            p.data em #{message.added.toLocaleDateString()} às #{message.added.toLocaleTimeString()}
+            p.data em #{message.createdAt.toLocaleDateString()} às #{message.createdAt.toLocaleTimeString()}
       .submit 
         include ./partials/form

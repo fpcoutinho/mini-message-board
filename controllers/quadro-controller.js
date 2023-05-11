@@ -1,31 +1,26 @@
-const messages = [
-  {
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date(),
-  },
-  {
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const Mensagem = require("../models/mensagem");
 
 const quadro_index = (req, res, next) => {
-  res.render("index", {
-    title: "Mini Quadro de Mensagens",
-    messages: messages.sort((a, b) => b.added - a.added),
-  });
+  Mensagem.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", {
+        title: "Mini Quadro de Mensagens",
+        messages: result,
+      });
+    });
 };
 
 const quadro_cria_post = (req, res, next) => {
-  const { user, text } = req.body;
-  messages.push({
-    text: text,
-    user: user,
-    added: new Date(),
-  });
-  res.redirect("/");
+  const msg = new Mensagem(req.body);
+  msg
+    .save()
+    .then((result) => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports = {
