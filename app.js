@@ -6,6 +6,7 @@ const logger = require("morgan");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
 
@@ -24,8 +25,9 @@ app.use("/users", usersRouter);
 
 // Database setup
 mongoose.set("strictQuery", false);
-const mongoDB =
-  "mongodb+srv://filcoutinho:6gAiJHxwhaUKuN7M@mini-quadro.z91ygib.mongodb.net/mensagens?retryWrites=true&w=majority";
+console.log(process.env);
+console.log(process.env.password);
+const mongoDB = `mongodb+srv://${process.env.username}:${process.env.password}@mini-quadro.z91ygib.mongodb.net/mensagens?retryWrites=true&w=majority`;
 
 main().catch((err) => console.log(err));
 async function main() {
