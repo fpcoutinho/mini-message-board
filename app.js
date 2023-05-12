@@ -25,9 +25,7 @@ app.use("/users", usersRouter);
 
 // Database setup
 mongoose.set("strictQuery", false);
-console.log(process.env);
-console.log(process.env.password);
-const mongoDB = `mongodb+srv://${process.env.username}:${process.env.password}@mini-quadro.z91ygib.mongodb.net/mensagens?retryWrites=true&w=majority`;
+const mongoDB = `mongodb+srv://${process.env.DB_username}:${process.env.password}@mqdm.4k5sdgu.mongodb.net/mensagens?retryWrites=true&w=majority`;
 
 main().catch((err) => console.log(err));
 async function main() {
